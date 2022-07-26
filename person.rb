@@ -8,13 +8,13 @@ class Person
     @name = name
   end
 
-  def of_age?
-    @age >= 10
-  end
-
-  private :of_age?
-
   def can_use_services?
     @age >= 18 || @parent_permission
+  end
+
+  private
+
+  def of_age?
+    @age >= 10
   end
 end

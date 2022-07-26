@@ -1,8 +1,8 @@
 
 
 ![](https://img.shields.io/badge/Microverse-blueviolet)
-> # ruby-templete
-This reposittory has all the sartup files required to start a ruby project with linters and so on, Please try it
+> # OOP school library
+This project is a school management app that use oop in ruby
 
 ## Built With
 

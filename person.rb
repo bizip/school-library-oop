@@ -1,6 +1,6 @@
 require './nameble'
-require "./capitalizedecorator"
-require "./trimerdecorator"
+require './capitalizedecorator'
+require './trimerdecorator'
 class Person < Nameble
   attr_accessor :name, :age
   attr_reader :id
@@ -27,8 +27,8 @@ class Person < Nameble
   end
 end
 person = Person.new(22, 'maximilianus')
-  person.correct_name
-  capitalizedPerson = CapitalizeDecorator.new(person)
-  capitalizedPerson.correct_name
-  capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-  capitalizedTrimmedPerson.correct_name
+person.correct_name
+capitalizedperson = CapitalizeDecorator.new(person)
+capitalizedperson.correct_name
+capitalizedtrimmedperson = TrimmerDecorator.new(capitalizedperson)
+capitalizedtrimmedperson.correct_name

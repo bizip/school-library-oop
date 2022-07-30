@@ -1,66 +1,61 @@
-require('./book')
-require('./student')
-require('./teacher')
-# require('./rental')
-def display_list_of(books)
+require_relative 'book'
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'rental'
+
+def list_of_books(books)
   if books.empty?
-    puts 'The is no book for now'
+    puts 'There is no book!'
   else
-    books.each { |list| puts "The book title is #{list.title} and the title is #{list.author} " }
+    books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
   end
 end
 
-def add_new_book(books)
-  puts 'Please enter the title of a Book'
-  title = gets.chomp
-  puts 'Please enter the author'
-  author = gets.chomp
-  books.push(Book.new(title, author))
-  puts 'New book created'
-end
-
-def case_number_one
-  puts "Let's create a student"
-  puts 'Enter the name:'
-  name = gets.chomp
-  puts 'Enter the age:'
-  age = gets.chomp
-  puts 'Do you have a parent permission? [Y/N]'
-  permission = gets.chomp
-  parent_permission = true if permission == 'Y'
-  parent_permission = false if permission == 'N'
-  people.push(Student.new(nil, name, age, parent_permission: parent_permission))
-  puts 'student sreated successful'
-end
-
-def display_list_of_people(people)
+def list_of_people(people)
   if people.empty?
-    puts 'The list of people is empty'
+    puts 'There is no person!'
   else
-    people.each { |person| puts "Name: #{person.name} age: #{person.age} parent #{permission}" }
+    people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
 end
 
-def add_new_person(people)
-  puts 'Do you whant to create a student (1) or a teacher (2):'
-  input = gets.chomp.to_i
-  case input
+def create_person(people)
+  print 'Do you want to create a student (1) or a teacher (2): '
+  selected_person = gets.chomp.to_i
+  print 'Age: '
+  age = gets.chomp.to_i
+  print 'Name: '
+  name = gets.chomp
+  case selected_person
   when 1
-    case_number_one
+    print 'Has parent permission? [Y/N]: '
+    provided_permission = gets.chomp.capitalize
+    student_permission = true if provided_permission == 'Y'
+    student_permission = false if provided_permission == 'N'
+    people.push(Student.new(nil, age, name, parent_permission: student_permission))
   when 2
-    puts 'Enter your specialization:'
+    print 'Specialization: '
     specialization = gets.chomp
     people.push(Teacher.new(specialization, age, name))
-    puts 'teacher created successful'
   end
+  puts 'Person created successfully.'
 end
 
-def add_new_rental(books, _student, people, _rental)
-  puts 'Choose a book from the list'
+def create_book(books)
+  print 'Title: '
+  title = gets.chomp
+  print 'Author: '
+  author = gets.chomp
+  books.push(Book.new(title, author))
+  puts 'Book created successfully.'
+end
+
+def create_rental(books, people, rentals)
+  puts 'Select a book from the following list by number'
   books.map.with_index { |book, index| puts "#{index}) Title: '#{book.title}', Author: #{book.author}" }
   selected_book = gets.chomp.to_i
 
-  puts 'Choose the person from the list:'
+  puts 'Select a person from the following list by number (Not ID): '
   people.map.with_index do |person, index|
     puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
   end
@@ -74,12 +69,10 @@ def add_new_rental(books, _student, people, _rental)
   puts 'Rental created successfully.'
 end
 
-def get_rentals_by_id(rental)
-  puts 'Please enter the person Id'
+def list_of_rentals_by_id(rentals)
+  print 'ID of person: '
   person_id = gets.chomp.to_i
-  rental.map do |rentals|
-    if rentals.person.id == person_id
-      puts "Date: #{rentals.date}, Book: #{rentals.book.title} by #{rentals.book.author}"
-    end
+  rentals.map do |rental|
+    puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" if rental.person.id == person_id
   end
 end

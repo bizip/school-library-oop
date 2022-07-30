@@ -1,12 +1,14 @@
-require './nameble'
-require './capitalizedecorator'
-require './trimerdecorator'
+require_relative 'nameble'
+require_relative 'capitalizedecorator'
+require_relative 'trimerdecorator'
+
 class Person < Nameble
   attr_accessor :name, :age
   attr_reader :id, :rentals
 
   def initialize(age, name = 'unknown', parent_permission: true)
     super()
+    @id = Random.rand(1..100)
     @age = age
     @parent_permission = parent_permission
     @name = name

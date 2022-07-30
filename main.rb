@@ -4,7 +4,7 @@ def main
   books = []
   student = []
   people = []
-  rental=[]
+  rental = []
   option(books, student, people, rental)
 end
 
@@ -19,7 +19,7 @@ def start_up
   puts '7 - Exit'
 end
 
-def grab_choice(choice, books, _student, people, rental)
+def grab_choice(choice, books, people, rental)
   case choice
   when '1'
     puts 'list of all books :'
